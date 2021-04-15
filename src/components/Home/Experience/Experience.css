@@ -1,0 +1,13 @@
+.experience {
+  margin-top: 100px;
+
+  height: auto;
+  display: block;
+}
+.xp-player {
+  width: 500px !important;
+  height: 300px  !important;
+}
+.experience ul {
+  list-style: none;
+}

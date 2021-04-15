@@ -1,5 +1,5 @@
-import { Alert } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./components/Home/Home/Home";
 import "./App.css";
 
 function App() {
@@ -9,20 +9,8 @@ function App() {
         <Switch>
           <Route path="/about"></Route>
           <Route path="/users"></Route>
-          <Route path="/">
-            <Alert variant="success">
-              <Alert.Heading>Hey, nice to see you</Alert.Heading>
-              <p>
-                Aww yeah, you successfully read this important alert message.
-                This example text is going to run a bit longer so that you can
-                see how spacing within an alert works with this kind of content.
-              </p>
-              <hr />
-              <p className="mb-0">
-                Whenever you need to, be sure to use margin utilities to keep
-                things nice and tidy.
-              </p>
-            </Alert>
+          <Route exact path="/">
+            <Home />
           </Route>
         </Switch>
       </div>

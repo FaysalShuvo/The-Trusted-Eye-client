@@ -1,0 +1,17 @@
+.header-bg {
+  background-image: url(../../../image/header-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header-bottom {
+  transform: translateY(50px);
+}
+.seeking-service {
+  background-color: #e53622;
+  color: white;
+}
+.hire {
+  background-color: #1c1c1c;
+  color: white;
+}
