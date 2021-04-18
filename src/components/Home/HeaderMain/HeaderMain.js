@@ -2,7 +2,7 @@ import React from "react";
 import "./HeaderMain.css";
 import header from "../../../image/header.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { faBrain, faUserSecret } from "@fortawesome/free-solid-svg-icons";
 const HeaderMain = () => {
   return (
     <div className="header-bg">
@@ -31,7 +31,7 @@ const HeaderMain = () => {
           <div className="col-md-6">
             <div className="row seeking-service">
               <div className="col-md-2 pt-4">
-                <FontAwesomeIcon style={{ fontSize: "50px" }} icon={faCoffee} />
+                <FontAwesomeIcon style={{ fontSize: "50px" }} icon={faBrain} />
               </div>
               <div className="col-md-10 pt-3">
                 <h5>SEEKING SERVICE</h5>
@@ -43,7 +43,10 @@ const HeaderMain = () => {
           <div className="col-md-6">
             <div className="row hire">
               <div className="col-md-2 pt-4">
-                <FontAwesomeIcon style={{ fontSize: "50px" }} icon={faCoffee} />
+                <FontAwesomeIcon
+                  style={{ fontSize: "50px" }}
+                  icon={faUserSecret}
+                />
               </div>
               <div className="col-md-10 pt-3">
                 <h5>WE'RE READY TO HELP</h5>

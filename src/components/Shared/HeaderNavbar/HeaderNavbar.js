@@ -1,8 +1,25 @@
-import React from "react";
-import { Button, Form, FormControl, Nav, Navbar } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../../App";
 
 const HeaderNavbar = () => {
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    fetch("https://hidden-headland-12235.herokuapp.com/isAdmin", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email: loggedInUser.email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setIsAdmin(data);
+      });
+  }, []);
+
   return (
     <>
       <Navbar bg="dark" variant="dark" expand="lg">
@@ -12,18 +29,39 @@ const HeaderNavbar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto"></Nav>
-          <Nav.Link className="text-brand " as={Link} to="/">
-            Home
+
+          {isAdmin && (
+            <Nav.Link
+              className="text-brand "
+              as={Link}
+              to="/dashboard/order-list"
+            >
+              Dashboard
+            </Nav.Link>
+          )}
+
+          <Nav.Link
+            className="text-brand "
+            as={Link}
+            to="/dashboard/bookings-list"
+          >
+            Bookings
           </Nav.Link>
-          <Nav.Link className="text-brand " as={Link} to="/">
-            Home
-          </Nav.Link>
-          <Nav.Link className="text-brand" as={Link} to="/ads">
-            Contact Us
-          </Nav.Link>
-          <Button className="text-white  btn-brand" variant="outline-none">
-            Log In
-          </Button>
+
+          <div>
+            {loggedInUser.name === undefined ? (
+              <Button
+                as={Link}
+                to="/login"
+                className="text-white  btn-brand"
+                variant="outline-none"
+              >
+                Log In
+              </Button>
+            ) : (
+              <Button variant="info">{loggedInUser.name}</Button>
+            )}
+          </div>
         </Navbar.Collapse>
       </Navbar>
     </>

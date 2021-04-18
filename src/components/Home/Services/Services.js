@@ -1,39 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import "./Services.css";
-import services01 from "../../../image/service-01.jpg";
-import services02 from "../../../image/service-02.jpg";
-import services03 from "../../../image/service-03.jpg";
 import ServiceDetails from "../ServiceDetails/ServiceDetails";
-const serviceData = [
-  {
-    name: "Find A Person",
-    img: services01,
-    price: 20,
-  },
-  {
-    name: "Murder Mystery",
-    img: services02,
-    price: 34,
-  },
-  {
-    name: "Material Infidelity",
-    img: services03,
-    price: 54,
-  },
-  
-];
 const Services = () => {
+  const [serviceData, setServiceData] = useState([]);
+  useEffect(() => {
+    fetch("https://hidden-headland-12235.herokuapp.com/services")
+      .then((res) => res.json())
+      .then((data) => setServiceData(data));
+  }, []);
+  console.log(serviceData);
   return (
     <section className="service-container container mt-5">
       <div className="text-center">
         <h5>OUR SERVICES</h5>
-        <h2>Services We Provide</h2>
+        <h2 className="text-brand font-weight-bold">Services We Provide</h2>
       </div>
-      <div className="row d-flex justify-content-center">
-        {serviceData.map((service) => (
-          <ServiceDetails key={service.name} service={service} />
-        ))}
-      </div>
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {
+            scale: 0.8,
+            opacity: 0,
+          },
+          visible: {
+            scale: 1,
+            opacity: 1,
+            transition: {
+              delay: 0.4,
+            },
+          },
+        }}
+      >
+        <div className="row d-flex justify-content-center">
+          {serviceData.map((service) => (
+            <ServiceDetails key={service._id} service={service} />
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 };
